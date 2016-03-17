@@ -19,7 +19,7 @@ public class WaveAlg {
 				map[i][j] = -1;
 			} 
 		}
-		// заполнение границ карты преп€тстви€ми
+		// заполнение границ карты препятствиями
 		for (int i = 0; i < width; i++) {
 			map[i][0] = wall;
 			map[width - 1][i] = wall;
@@ -31,7 +31,7 @@ public class WaveAlg {
 	}
 
 	public void block(int x, int y) {
-		// заполн€ем карту преп€тстви€ми
+		// заполняем карту препятствиями
 		map[y][x] = wall;
 	}
 
@@ -70,7 +70,7 @@ public class WaveAlg {
 		}
 		// traceOut(map);  //посмотреть распространение волны  
 
-		// волновйо алгоритм поиска пути начина€ от начала
+		// волновой алгоритм поиска пути начиная от начала
 		wave.clear();
 		wave.add(new Point(x, y));
 		while (map[y][x] != 0) {
@@ -114,7 +114,7 @@ public class WaveAlg {
 	{
 		String m = null;
 		System.out.print("   ");
-		for (int i = 0; i < height; i++) // ¬ывод верхней нумерации
+		for (int i = 0; i < height; i++) // вывод верхней нумерации
 		{
 			System.out.print(i > 9 ? i + " " : i + "  ");
 		}

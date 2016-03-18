@@ -28,9 +28,8 @@ public class Program {
 		Document xDoc = db.parse(XmlReader.class.getResourceAsStream("/data.xml"));
 		xDoc.normalize();
 		NodeList nList = xDoc.getElementsByTagName("Size");
-
-		Node node;
-		node = nList.item(0);
+		
+		Node node = nList.item(0);
 		Element element = (Element) node;
 
 		int height = Integer.parseInt(element.getElementsByTagName("Height").item(0).getTextContent());

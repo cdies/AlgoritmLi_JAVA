@@ -27,7 +27,7 @@ public class Program {
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document xDoc = db.parse(XmlReader.class.getResourceAsStream("/data.xml"));
 		xDoc.normalize();
-		NodeList nList = xDoc.getElementsByTagName("Alg");
+		NodeList nList = xDoc.getElementsByTagName("Size");
 
 		Node node;
 		node = nList.item(0);
@@ -36,16 +36,16 @@ public class Program {
 		int height = Integer.parseInt(element.getElementsByTagName("Height").item(0).getTextContent());
 		int width = Integer.parseInt(element.getElementsByTagName("Width").item(0).getTextContent());
 		WaveAlg Path = new WaveAlg(width, height);
-		int i = 0;
-		while (true) {
-			try {
-				x = Integer.parseInt(element.getElementsByTagName("X").item(i).getTextContent());
-				y = Integer.parseInt(element.getElementsByTagName("Y").item(i).getTextContent());
+
+		nList = xDoc.getElementsByTagName("Block");
+		for (int i = 0; i < nList.getLength(); i++) {
+			node = nList.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				element = (Element) node;
+				x = Integer.parseInt(element.getElementsByTagName("X").item(0).getTextContent());
+				y = Integer.parseInt(element.getElementsByTagName("Y").item(0).getTextContent());
 				Path.block(x, y);
-			} catch (NullPointerException e) {
-				break;
 			}
-			i++;
 		}
 
 		Path.traceOut();

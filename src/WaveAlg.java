@@ -17,7 +17,7 @@ public class WaveAlg {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				map[i][j] = -1;
-			} 
+			}
 		}
 		// заполнение границ карты препятствиями
 		for (int i = 0; i < width; i++) {
@@ -30,14 +30,14 @@ public class WaveAlg {
 		}
 	}
 
-	public void block(int x, int y) {
+	void block(int x, int y) {
 		// заполняем карту препятствиями
 		map[y][x] = wall;
 	}
 
 	public void findPath(int x, int y, int nx, int ny) {
 		if (map[y][x] == wall || map[ny][nx] == wall) {
-			System.out.println("¬ы выбрали преп€тствие");
+			System.out.println("Вы выбрали препятствие");
 			return;
 		}
 
@@ -68,12 +68,14 @@ public class WaveAlg {
 			}
 			oldWave = new ArrayList<Point>(wave);
 		}
-		// traceOut(map);  //посмотреть распространение волны  
+		// traceOut(map); //посмотреть распространение волны
 
-		// волновой алгоритм поиска пути начиная от начала
+		// волновйо алгоритм поиска пути начиная от начала
+		boolean flag = true;
 		wave.clear();
 		wave.add(new Point(x, y));
 		while (map[y][x] != 0) {
+			flag = true;
 			for (int d = 0; d < 4; d++) {
 				nx = x + dx[d];
 				ny = y + dy[d];
@@ -81,8 +83,13 @@ public class WaveAlg {
 					x = nx;
 					y = ny;
 					wave.add(new Point(x, y));
+					flag = false;
 					break;
 				}
+			}
+			if (flag) {
+				System.out.println("Пути нет!");
+				break;
 			}
 		}
 
@@ -114,7 +121,7 @@ public class WaveAlg {
 	{
 		String m = null;
 		System.out.print("   ");
-		for (int i = 0; i < height; i++) // вывод верхней нумерации
+		for (int i = 0; i < height; i++) // Вывод верхней нумерации
 		{
 			System.out.print(i > 9 ? i + " " : i + "  ");
 		}
@@ -129,12 +136,11 @@ public class WaveAlg {
 
 	}
 
-	private int[][] clone(int[][] map)
-	{
+	private int[][] clone(int[][] map) {
 		int[][] cloneMap = new int[width][height];
-		for(int i=0; i<map.length; i++)
-			  for(int j=0; j<map[i].length; j++)
-			    cloneMap[i][j]=map[i][j];
+		for (int i = 0; i < map.length; i++)
+			for (int j = 0; j < map[i].length; j++)
+				cloneMap[i][j] = map[i][j];
 		return cloneMap;
 	}
 }

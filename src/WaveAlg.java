@@ -30,7 +30,7 @@ public class WaveAlg {
 		}
 	}
 
-	void block(int x, int y) {
+	public void block(int x, int y) {
 		// заполняем карту препятствиями
 		map[y][x] = wall;
 	}
